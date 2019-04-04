@@ -541,7 +541,8 @@ class SQSBackend(BaseBackend):
 
         return result
 
-    def delete_message(self, queue_name, receipt_handle):
+    def delete_message(self, queue_url, receipt_handle):
+    	queue_name = queue_url.split("/")[-1]
         queue = self.get_queue(queue_name)
         new_messages = []
         for message in queue._messages:
